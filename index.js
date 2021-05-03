@@ -2,9 +2,8 @@ const express = require('express');
 const app = express();
 const port = 5000;
 const cookieParser = require('cookie-parser');
-
 const config = require('./config/key');
-
+const auth = require('./middleware/auth');
 const { User } = require('./models/User');
 
 app.use(express.urlencoded({ extended: true }));
@@ -67,6 +66,20 @@ app.post('/api/user/login', (req, res) => {
 					.json({ loginSuccess: true, userId: user._id });
 			});
 		});
+	});
+});
+
+app.get('/api/user/auth', auth, (req, res) => {
+	// 여기까지 미들웨어를 통과해 왔다는 얘기는 Authentication이 Ture라는 말.
+	res.status(200).json({
+		_id: req.user._id,
+		isAdmin: req.user.role === 0 ? false : true,
+		isAuth: true,
+		email: req.user.email,
+		name: req.user.name,
+		lastname: req.user.lastname,
+		role: req.user.role,
+		image: req.user.image,
 	});
 });
 
