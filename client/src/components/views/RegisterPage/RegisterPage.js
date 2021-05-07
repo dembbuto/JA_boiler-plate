@@ -36,7 +36,6 @@ function RegisterPage(props) {
     let body = {
       email: Email,
       password: Password,
-
     }
 
     dispatch(registerUser(body))
@@ -47,7 +46,6 @@ function RegisterPage(props) {
           alert('Failed to sign up')
         }
       })
-
   }
 
   return (
