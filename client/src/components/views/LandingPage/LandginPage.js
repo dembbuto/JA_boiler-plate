@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
+import { withRouter } from 'react-router-dom'
 
 function LandginPage(props) {
   useEffect(() => {
     axios.get('/api/hello')
-    .then(response => {
-      console.log(response)
-    })
   }, [])
 
   const onClickHandler = () => {
@@ -22,12 +20,12 @@ function LandginPage(props) {
 
   return (
     <div style={{
-      display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100vh'
+      display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100vh', flexDirection: 'column'
     }}>
       <h2>시작 페이지</h2>
-      <button onClick={onClickHandler}>로그아웃</button>
+      <button onClick={onClickHandler}>Logout</button>
     </div>
   )
 }
 
-export default LandginPage
+export default withRouter(LandginPage)
